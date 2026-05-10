@@ -24,7 +24,6 @@ const LANG = {
     reasons: [
       { label: '🐛 Bug Report',       value: 'bug',        description: 'Report a bug or technical issue' },
       { label: '💡 Suggestion',        value: 'suggestion', description: 'Submit a suggestion or idea' },
-      { label: '🛍️ Make a Purchase', value: 'achat', description: 'I want to make a purchase' },
       { label: '🛒 Purchase Issue',    value: 'purchase',   description: 'Problem with a purchase' },
       { label: '🚨 Report a User',     value: 'report',     description: 'Report a problematic user' },
       { label: '❓ Other',             value: 'other',      description: 'Any other request' },
@@ -46,7 +45,6 @@ const LANG = {
     reasons: [
       { label: '🐛 Signaler un bug',          value: 'bug',        description: 'Bug ou problème technique' },
       { label: '💡 Suggestion',                value: 'suggestion', description: 'Idée ou suggestion' },
-      { label: '🛍️ Faire un achat', value: 'achat', description: 'Effectuer un achat' },
       { label: '🛒 Problème d\'achat',         value: 'purchase',   description: 'Problème lié à un achat' },
       { label: '🚨 Signaler un utilisateur',   value: 'report',     description: 'Utilisateur problématique' },
       { label: '❓ Autre',                     value: 'other',      description: 'Toute autre demande' },
@@ -82,8 +80,8 @@ const client = new Client({
 // ══════════════════════════════════════════════════════════
 //  READY
 // ══════════════════════════════════════════════════════════
-client.once('ready', async () => {
-  console.log(`✅ Connecté en tant que ${client.user.tag}`);
+client.once('clientReady', async (readyClient) => {
+  console.log(`✅ Connecté en tant que ${readyClient.user.tag}`);
 
   // ── Avatar GIF ──────────────────────────────────────────
   // Place ton fichier dans assets/avatar.gif puis décommente :
@@ -91,7 +89,7 @@ client.once('ready', async () => {
 
   // ── Bannière GIF (bot vérifié requis) ───────────────────
   // Place ton fichier dans assets/banner.gif puis décommente :
-  // await client.user.setBanner('./assets/banner.gif');
+  // await client.user.setBanner('./assets/banner.gif'); // Décommente si bot vérifié + fichier présent
 
   // ── Statuts rotatifs ────────────────────────────────────
   const statuses = [
@@ -102,7 +100,7 @@ client.once('ready', async () => {
   let i = 0;
   const next = () => {
     const s = statuses[i++ % statuses.length];
-    client.user.setPresence({ activities: [s], status: 'online' });
+    readyClient.user.setPresence({ activities: [s], status: 'online' });
   };
   next();
   setInterval(next, 10_000);
@@ -116,6 +114,7 @@ client.once('ready', async () => {
       .toJSON(),
   ];
   const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
+  if (!process.env.CLIENT_ID) throw new Error('CLIENT_ID manquant dans .env !');
   await rest.put(
     Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
     { body: commands }
