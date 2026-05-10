@@ -89,7 +89,7 @@ client.once('ready', async () => {
 
   // ── Bannière GIF (bot vérifié requis) ───────────────────
   // Place ton fichier dans assets/banner.gif puis décommente :
-   await client.user.setBanner('./assets/banner.gif');
+  // await client.user.setBanner('./assets/banner.gif');
 
   // ── Statuts rotatifs ────────────────────────────────────
   const statuses = [
