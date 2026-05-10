@@ -24,6 +24,7 @@ const LANG = {
     reasons: [
       { label: '🐛 Bug Report',       value: 'bug',        description: 'Report a bug or technical issue' },
       { label: '💡 Suggestion',        value: 'suggestion', description: 'Submit a suggestion or idea' },
+      { label: '🛍️ Make a Purchase', value: 'achat', description: 'I want to make a purchase' },
       { label: '🛒 Purchase Issue',    value: 'purchase',   description: 'Problem with a purchase' },
       { label: '🚨 Report a User',     value: 'report',     description: 'Report a problematic user' },
       { label: '❓ Other',             value: 'other',      description: 'Any other request' },
@@ -45,6 +46,7 @@ const LANG = {
     reasons: [
       { label: '🐛 Signaler un bug',          value: 'bug',        description: 'Bug ou problème technique' },
       { label: '💡 Suggestion',                value: 'suggestion', description: 'Idée ou suggestion' },
+      { label: '🛍️ Faire un achat', value: 'achat', description: 'Effectuer un achat' },
       { label: '🛒 Problème d\'achat',         value: 'purchase',   description: 'Problème lié à un achat' },
       { label: '🚨 Signaler un utilisateur',   value: 'report',     description: 'Utilisateur problématique' },
       { label: '❓ Autre',                     value: 'other',      description: 'Toute autre demande' },
